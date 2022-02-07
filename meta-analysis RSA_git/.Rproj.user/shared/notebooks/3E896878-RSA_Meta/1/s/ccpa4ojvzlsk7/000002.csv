@@ -1,0 +1,5 @@
+"0","studyid_extractor <- function(task_name){"
+"0","  occur_combined %>% "
+"0","    filter(meta_name == task_name) %>% "
+"0","    select(""study_id"")"
+"0","}"

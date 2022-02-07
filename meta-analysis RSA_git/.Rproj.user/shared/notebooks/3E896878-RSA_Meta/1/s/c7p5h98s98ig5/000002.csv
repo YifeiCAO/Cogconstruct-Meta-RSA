@@ -1,0 +1,7 @@
+"0","#switching
+switching <- studyid_extractor(""Switching_task"") %>% 
+  mutate(nimare_ids = paste0(study_id, ""-1"")) 
+"
+"2","Error in studyid_extractor(""Switching_task"") : 
+  没有""studyid_extractor""这个函数
+"

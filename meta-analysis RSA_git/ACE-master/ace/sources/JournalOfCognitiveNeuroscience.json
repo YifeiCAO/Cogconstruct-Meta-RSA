@@ -1,0 +1,10 @@
+{
+  "name": "JournalOfCognitiveNeuroscience",
+  "identifiers": [
+    "<title>MIT Press Journals - Journal of Cognitive Neuroscience - Full Text</title>"
+  ],
+  "entities": {
+  	"\u2002": " "
+  },
+  "delay": 10
+}

@@ -1,0 +1,32 @@
+{
+    "id": "9D9F771F",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1644073255386.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "expression": "total_occur",
+        "caption": "total_occur",
+        "totalObservations": 44,
+        "displayedObservations": 44,
+        "variables": 2,
+        "cacheKey": "F6AFE1CD",
+        "object": "total_occur",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=total_occur&cache_key=F6AFE1CD&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 32852584,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1644073255386,
+    "read_only": false,
+    "read_only_alternatives": []
+}

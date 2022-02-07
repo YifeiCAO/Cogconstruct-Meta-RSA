@@ -1,0 +1,12 @@
+"0","cog_label <- readxl::read_xlsx(""Selected_cogconstruct_label.xlsx"")"
+"0","label_occur <- readxl::read_xlsx(""dtm_210114.xlsx"")"
+"0",""
+"0","occur_combined <- label_occur %>% "
+"0","  pivot_longer(cols = -c(""study_id""), names_to = ""term_name"", values_to = ""occurrence"") %>% "
+"0","  left_join(cog_label, by = ""term_name"") %>% "
+"0","  filter(!is.na(meta_name)) %>% "
+"0","  group_by(study_id, meta_name) %>% "
+"0","  summarize(task_occurrence = sum(occurrence)) %>% "
+"0","  filter(task_occurrence > 1)"
+"2","`summarise()` has grouped output by 'study_id'. You can override using the `.groups` argument.
+"

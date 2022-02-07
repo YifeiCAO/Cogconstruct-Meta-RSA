@@ -1,0 +1,3 @@
+"0","total_occur <- occur_combined %>% "
+"0","  group_by(meta_name) %>% "
+"0","  summarize(total_occurrence = length(study_id))"

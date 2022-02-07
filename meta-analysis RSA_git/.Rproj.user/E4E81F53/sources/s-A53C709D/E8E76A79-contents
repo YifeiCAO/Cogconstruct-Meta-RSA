@@ -1,0 +1,103 @@
+---
+title: "Correlation_matrix"
+author: "Yifei Cao"
+date: "2/5/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(reshape2)
+library(RColorBrewer)
+library(ggplot2)
+library(viridis)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+stroop_voxel <- readxl::read_xlsx("stroop_voxel.xlsx")
+nback_voxel <- readxl::read_xlsx("nback_voxel.xlsx")
+word_generation_voxel <- readxl::read_xlsx("word_generation_voxel.xlsx")
+wisconsin_voxel <- readxl::read_xlsx("wisconsin_voxel.xlsx")
+oddball_voxel <- readxl::read_xlsx("oddball_voxel.xlsx")
+go_nogo_voxel <- readxl::read_xlsx("go_nogo_voxel.xlsx")
+iowa_voxel <- readxl::read_xlsx("iowa_voxel.xlsx")
+recognition_voxel <- readxl::read_xlsx("recognition_voxel.xlsx")
+anti_saccade_voxel <- readxl::read_xlsx("anti_saccade_voxel.xlsx")
+flanker_voxel <- readxl::read_xlsx("flanker_voxel.xlsx")
+switching_voxel <- readxl::read_xlsx("switching_voxel.xlsx")
+calculation_voxel <- readxl::read_xlsx("calculation_voxel.xlsx")
+mental_rotation_voxel <- readxl::read_xlsx("mental_rotation_voxel.xlsx")
+selective_attention_voxel <- readxl::read_xlsx("selective_attention_voxel.xlsx")
+tower_of_london_voxel <- readxl::read_xlsx("tower_of_london_voxel.xlsx")
+verbal_fluency_voxel <- readxl::read_xlsx("verbal_fluency_voxel.xlsx")
+visual_search_voxel <- readxl::read_xlsx("visual_search_voxel.xlsx")
+auditory_discrimination_voxel <- readxl::read_xlsx("auditory_discrimination_voxel.xlsx")
+continuous_performance_voxel <- readxl::read_xlsx("continuous_performance_voxel.xlsx")
+simon_voxel <- readxl::read_xlsx("simon_voxel.xlsx")
+choice_reaction_time_voxel <- readxl::read_xlsx("choice_reaction_time_voxel.xlsx")
+reasoning_voxel <- readxl::read_xlsx("reasoning_voxel.xlsx")
+delay_memory_voxel <- readxl::read_xlsx("delay_memory_voxel.xlsx")
+orientation_match_voxel <- readxl::read_xlsx("orientation_match_voxel.xlsx")
+trial_making_voxel <- readxl::read_xlsx("trial_making_voxel.xlsx")
+forward_span_voxel <- readxl::read_xlsx("forward_span_voxel.xlsx")
+complex_span_voxel <- readxl::read_xlsx("complex_span_voxel.xlsx")
+simple_reaction_time_voxel <- readxl::read_xlsx("simple_reaction_time_voxel.xlsx")
+```
+
+```{r}
+total_matrix <- stroop_voxel %>% 
+  left_join(nback_voxel, by = "voxel_num") %>%
+  left_join(word_generation_voxel, by = "voxel_num") %>% 
+  left_join(oddball_voxel, by = "voxel_num") %>% 
+  left_join(wisconsin_voxel, by = "voxel_num") %>% 
+  left_join(go_nogo_voxel, by = "voxel_num") %>% 
+  left_join(iowa_voxel, by = "voxel_num") %>% 
+  left_join(recognition_voxel, by = "voxel_num") %>% 
+  left_join(anti_saccade_voxel, by = "voxel_num") %>% 
+  left_join(flanker_voxel, by = "voxel_num") %>% 
+  left_join(switching_voxel, by = "voxel_num") %>% 
+  left_join(calculation_voxel, by = "voxel_num") %>% 
+  left_join(mental_rotation_voxel, by = "voxel_num") %>% 
+  left_join(selective_attention_voxel, by = "voxel_num") %>% 
+  left_join(tower_of_london_voxel, by = "voxel_num") %>% 
+  left_join(verbal_fluency_voxel, by = "voxel_num") %>% 
+  left_join(visual_search_voxel, by = "voxel_num") %>% 
+  left_join(auditory_discrimination_voxel, by = "voxel_num") %>% 
+  left_join(continuous_performance_voxel, by = "voxel_num") %>% 
+  left_join(simon_voxel, by = "voxel_num") %>% 
+  left_join(choice_reaction_time_voxel, by = "voxel_num") %>% 
+  left_join(reasoning_voxel, by = "voxel_num") %>% 
+  left_join(delay_memory_voxel, by = "voxel_num") %>% 
+  left_join(orientation_match_voxel, by = "voxel_num") %>% 
+  left_join(trial_making_voxel, by = "voxel_num") %>% 
+  left_join(forward_span_voxel, by = "voxel_num") %>% 
+  left_join(complex_span_voxel, by = "voxel_num") %>% 
+  left_join(simple_reaction_time_voxel, by = "voxel_num") %>% 
+  select(-c("voxel_num"))
+total_nonzero <- total_matrix[which(rowSums(total_matrix) > 0),]
+cor_total <- round(cor(total_matrix),2)
+cor_nonzero <- round(cor(total_nonzero),2)
+```
+
+```{r}
+melted_cor_nonzero <- melt(cor_nonzero) %>% 
+ mutate(percrank=rank(value)/length(value))
+
+ggplot(data = melted_cor_nonzero, aes(Var2, Var1, fill = percrank))+
+ geom_tile(color = "black")+
+  scale_fill_viridis(discrete=FALSE)+
+  theme_minimal()+ 
+ theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+    size = 7, hjust = 1),
+    axis.text.y = element_text(size = 7))+
+ coord_fixed()
+
+#  geom_text(aes(Var2,Var1, label = percrank), color = "black", size = 4)
+```
+```{r}
+total_nonzero <- t(total_nonzero)
+```
+
